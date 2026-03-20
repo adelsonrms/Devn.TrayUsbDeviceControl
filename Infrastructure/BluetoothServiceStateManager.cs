@@ -1,4 +1,4 @@
-namespace Devn.TrayUsbDeviceControl;
+namespace Devn.TrayUsbDeviceControl.Infrastructure;
 
 using System;
 using System.Runtime.InteropServices;

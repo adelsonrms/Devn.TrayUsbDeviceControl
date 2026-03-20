@@ -1,4 +1,10 @@
-namespace Devn.TrayUsbDeviceControl;
+using Devn.TrayUsbDeviceControl.Core.Models;
+using Devn.TrayUsbDeviceControl.Infrastructure;
+using System;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Devn.TrayUsbDeviceControl.Core.Services;
 
 public sealed class DeviceConnectionService
 {
@@ -21,7 +27,7 @@ public sealed class DeviceConnectionService
             _stateManager.EnableService(device.Address, BluetoothServiceGuids.Avrcp);
             _stateManager.EnableService(device.Address, BluetoothServiceGuids.AvrcpTarget);
 
-            await Task.Delay(500); // Wait bit more for OS stack
+            await Task.Delay(500); 
         }
         catch (Exception ex)
         {
@@ -39,7 +45,6 @@ public sealed class DeviceConnectionService
 
         try
         {
-            // First try standard disconnect of known services
             _stateManager.DisableService(device.Address, BluetoothServiceGuids.AudioSink);
             _stateManager.DisableService(device.Address, BluetoothServiceGuids.Handsfree);
             _stateManager.DisableService(device.Address, BluetoothServiceGuids.A2dp);
@@ -47,7 +52,6 @@ public sealed class DeviceConnectionService
             _stateManager.DisableService(device.Address, BluetoothServiceGuids.Avrcp);
             _stateManager.DisableService(device.Address, BluetoothServiceGuids.AvrcpTarget);
 
-            // Force cleanup of ANY other installed service (The "Nuclear" option)
             var inspector = new BluetoothServiceInspector();
             var services = inspector.GetInstalledServices(device.Address);
             foreach (var service in services)

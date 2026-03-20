@@ -1,6 +1,7 @@
+using Devn.TrayUsbDeviceControl.Core.Models;
 using System.Runtime.InteropServices;
 
-namespace Devn.TrayUsbDeviceControl;
+namespace Devn.TrayUsbDeviceControl.Infrastructure;
 
 public sealed class BluetoothServiceInspector
 {
@@ -73,34 +74,5 @@ public sealed class BluetoothServiceInspector
         public ushort wMinute;
         public ushort wSecond;
         public ushort wMilliseconds;
-    }
-}
-
-public static class BluetoothServiceGuids
-{
-    public static readonly Guid AudioSink = new("0000110B-0000-1000-8000-00805F9B34FB");
-    public static readonly Guid AudioSource = new("0000110A-0000-1000-8000-00805F9B34FB");
-    public static readonly Guid Handsfree = new("0000111E-0000-1000-8000-00805F9B34FB");
-    public static readonly Guid Headset = new("00001108-0000-1000-8000-00805F9B34FB");
-    public static readonly Guid A2dp = new("0000110D-0000-1000-8000-00805F9B34FB");
-    public static readonly Guid Avrcp = new("0000110E-0000-1000-8000-00805F9B34FB");
-    public static readonly Guid AvrcpTarget = new("0000110C-0000-1000-8000-00805F9B34FB");
-}
-
-public static class BluetoothServiceNames
-{
-    private static readonly Dictionary<Guid, string> _serviceNames = new()
-    {
-        { BluetoothServiceGuids.AudioSink, "Audio Sink" },
-        { BluetoothServiceGuids.AudioSource, "Audio Source" },
-        { BluetoothServiceGuids.Handsfree, "Handsfree" },
-        { BluetoothServiceGuids.Headset, "Headset" },
-        { BluetoothServiceGuids.A2dp, "A2DP" }
-    };
-    public static string GetName(Guid serviceGuid)
-    {
-        if (_serviceNames.TryGetValue(serviceGuid, out var name))
-            return name;
-        return serviceGuid.ToString();
     }
 }

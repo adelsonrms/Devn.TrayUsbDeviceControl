@@ -1,8 +1,9 @@
 using System.Runtime.InteropServices;
 using System;
 using System.Collections.Generic;
+using Devn.TrayUsbDeviceControl.Core.Models;
 
-namespace Devn.TrayUsbDeviceControl;
+namespace Devn.TrayUsbDeviceControl.Infrastructure;
 
 public sealed class BluetoothClassicService
 {
